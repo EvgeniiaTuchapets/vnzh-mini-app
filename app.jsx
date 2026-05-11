@@ -149,23 +149,25 @@ const ACCENT_LABELS = { blue: 'Синий (TG)', norwegian: 'Норвежски�
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
 
-  // Если приложение открыто внутри Telegram — initData будет непустой строкой
+  // Telegram заполняет initData только когда приложение открыто прямо в нём
   const isInTelegram = Boolean(window.Telegram?.WebApp?.initData);
+  // На localhost — режим дизайн-стенда (рамка, панель настроек)
+  const isLocalDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
   useEffect(() => {
-    if (!isInTelegram) return;
-    const tg = window.Telegram.WebApp;
+    const tg = window.Telegram?.WebApp;
+    if (!tg) return;
     tg.ready();   // говорим Telegram «приложение загружено, убери лоадер»
     tg.expand();  // разворачиваем на весь экран
   }, []);
 
-  // Внутри Telegram — рендерим только само приложение, без рамки и панели
-  if (isInTelegram) {
+  // На GitHub Pages или в Telegram — рендерим только само приложение, без рамки
+  if (!isLocalDev) {
     const isDark = window.Telegram?.WebApp?.colorScheme === 'dark';
     return <MiniApp tweaks={{ ...TWEAK_DEFAULTS, dark: isDark }} />;
   }
 
-  // В браузере — оставляем дизайн-стенд с рамкой и панелью настроек
+  // На localhost — оставляем дизайн-стенд с рамкой и панелью настроек
   return (
     <>
       <div className="stage-title">
