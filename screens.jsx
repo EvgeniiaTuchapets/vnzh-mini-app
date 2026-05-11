@@ -364,11 +364,10 @@ function AboutScreen() {
         </a>
 
         <div className="section-header">Обратная связь</div>
-        <a className="tg-cell" href="#" onClick={(e) => e.preventDefault()}>
+        <a className="tg-cell" href="https://t.me/fan4itta" target="_blank" rel="noopener noreferrer">
           <div className="case-cell-icon" style={caseIconVars('skilled')}>✉️</div>
           <div className="tg-cell-body">
             <div className="tg-cell-title">Сообщить об ошибке или дополнить</div>
-            <div className="tg-cell-subtitle">@vnzh_norway_bot</div>
           </div>
           <div className="tg-cell-action">›</div>
         </a>
@@ -567,7 +566,7 @@ function ArticleView({ title }) {
               </button>
             </div>
           </div>
-          <a className="tg-button tg-button--filled" href="#" onClick={(e) => e.preventDefault()}>Написать в @vnzh_norway_bot</a>
+          <a className="tg-button tg-button--filled" href="https://t.me/fan4itta" target="_blank" rel="noopener noreferrer">Написать в @vnzh_norway_bot</a>
         </div>
 
         <div style={{ height: 24 }} />
