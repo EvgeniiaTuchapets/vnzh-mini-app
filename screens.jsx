@@ -540,7 +540,6 @@ function ArticleView({ title }) {
         )}
 
         <div className="art-block art-feedback">
-          <div className="art-block-title">Нашли ошибку?</div>
           <p>Если в статье что-то устарело или неточно — напишите нам. Мы поправим.</p>
           <div className="art-feedback-ref">
             <span className="art-feedback-ref-label">Название статьи</span>
@@ -566,7 +565,7 @@ function ArticleView({ title }) {
               </button>
             </div>
           </div>
-          <a className="tg-button tg-button--filled" href="https://t.me/fan4itta" target="_blank" rel="noopener noreferrer">Написать в @vnzh_norway_bot</a>
+          <a className="tg-button tg-button--filled" href="https://t.me/fan4itta" target="_blank" rel="noopener noreferrer">Сообщить об ошибке</a>
         </div>
 
         <div style={{ height: 24 }} />
