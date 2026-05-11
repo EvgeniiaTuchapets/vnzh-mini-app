@@ -1,0 +1,296 @@
+/* ============================================================
+   TOKENS — Telegram Mini App / VNZH Norway KB
+   ------------------------------------------------------------
+   Three layers:
+   1. TG BASE       — bound to Telegram theme variables w/ fallback
+   2. PRODUCT       — semantic tokens for cases, stages, blocks
+   3. SCALE         — radius, spacing, typography
+   ------------------------------------------------------------
+   Rule: components reference tokens, never raw HEX.
+   HEX lives only in this file (and THEMES/ACCENTS in data.js).
+   ============================================================ */
+
+:root {
+  /* ----- 1. TG BASE (light fallbacks) ----- */
+  --tg-bg:               var(--tg-theme-bg-color,                 #EFEFF4);
+  --tg-secondary-bg:     var(--tg-theme-secondary-bg-color,       #FFFFFF);
+  --tg-section-bg:       var(--tg-theme-section-bg-color,         #FFFFFF);
+  --tg-tertiary-bg:      var(--tg-theme-secondary-bg-color,       #F2F2F7);
+  --tg-text:             var(--tg-theme-text-color,               #000000);
+  --tg-hint:             var(--tg-theme-hint-color,               #8E8E93);
+  --tg-subtitle:         var(--tg-theme-subtitle-text-color,      #8E8E93);
+  --tg-section-header:   var(--tg-theme-section-header-text-color,#6D6D72);
+  --tg-button-color:     var(--tg-theme-button-color,             #2481CC);
+  --tg-button-text:      var(--tg-theme-button-text-color,        #FFFFFF);
+  --tg-accent-text:      var(--tg-theme-accent-text-color,        #2481CC);
+  --tg-link:             var(--tg-theme-link-color,               #2481CC);
+  --tg-destructive:      var(--tg-theme-destructive-text-color,   #FF3B30);
+  --tg-header-bg:        var(--tg-theme-header-bg-color,          #FFFFFF);
+  --tg-header-text:      var(--tg-theme-text-color,               #000000);
+  --tg-divider:          var(--tg-theme-section-separator-color,  rgba(60,60,67,0.12));
+
+  /* ----- 2. PRODUCT — Cases ----- */
+  --case-all-text:       #6E6E73;
+  --case-all-bg:         rgba(110,110,115,0.10);
+  --case-norwegian-text: #2D7A4E;
+  --case-norwegian-bg:   rgba(45,122,78,0.10);
+  --case-eu-text:        #2271B3;
+  --case-eu-bg:          rgba(34,113,179,0.10);
+  --case-skilled-text:   #B8651E;
+  --case-skilled-bg:     rgba(184,101,30,0.10);
+  --case-refugee-text:   #8B3F76;
+  --case-refugee-bg:     rgba(139,63,118,0.10);
+
+  /* ----- 2. PRODUCT — Stages ----- */
+  --stage-prepare-text:  #1F66D8;
+  --stage-prepare-bg:    rgba(52,120,246,0.10);
+  --stage-wait-text:     #8B5C1B;
+  --stage-wait-bg:       rgba(194,131,48,0.12);
+  --stage-got-text:      #1F5A38;
+  --stage-got-bg:        rgba(45,122,78,0.10);
+  --stage-renew-text:    #6B2C5A;
+  --stage-renew-bg:      rgba(139,63,118,0.10);
+  --stage-other-text:    #4A4A4D;
+  --stage-other-bg:      rgba(110,110,115,0.10);
+  --stage-multi-text:    #6B4A8F;
+  --stage-multi-bg:      rgba(107,74,143,0.10);
+
+  /* ----- 2. PRODUCT — Blocks ----- */
+  --block-tldr-text:     #1F5A38;
+  --block-tldr-bg:       rgba(45,122,78,0.08);
+  --block-tldr-border:   rgba(45,122,78,0.18);
+  --block-action-text:   var(--tg-text);
+  --block-action-bg:     rgba(36,129,204,0.08);
+  --block-action-border: rgba(36,129,204,0.20);
+  --block-warn-text:     #8C4A00;
+  --block-warn-bg:       rgba(255,149,0,0.10);
+  --block-warn-border:   rgba(255,149,0,0.22);
+  --block-tip-text:      #1F5A38;
+  --block-tip-bg:        rgba(52,199,89,0.08);
+  --block-tip-border:    rgba(52,199,89,0.20);
+  --block-faq-text:      var(--tg-text);
+  --block-faq-bg:        rgba(36,129,204,0.05);
+  --block-faq-border:    rgba(36,129,204,0.18);
+  --block-quote-text:    #6B4A8F;
+  --block-quote-bg:      rgba(107,74,143,0.06);
+  --block-feedback-bg:   rgba(36,129,204,0.05);
+  --block-community-bg:  rgba(107,74,143,0.06);
+  --block-community-bar: #6B4A8F;
+  --block-compare-udi-bg:      rgba(50,120,170,0.08);
+  --block-compare-udi-border:  rgba(50,120,170,0.20);
+  --block-compare-prac-bg:     rgba(180,140,80,0.08);
+  --block-compare-prac-border: rgba(180,140,80,0.22);
+
+  /* ----- 2. PRODUCT — Start article card ----- */
+  --start-card-bg:       linear-gradient(135deg,
+                           color-mix(in srgb, var(--tg-button-color) 12%, var(--tg-section-bg)),
+                           var(--tg-section-bg));
+  --start-card-border:   color-mix(in srgb, var(--tg-button-color) 28%, transparent);
+  --start-card-kicker:   var(--tg-button-color);
+
+  /* ----- 2. PRODUCT — Path card variants ----- */
+  --path-1-bg:           rgba(196,120,120,0.08);
+  --path-1-bar:          #C47878;
+  --path-2-bg:           rgba(107,139,196,0.08);
+  --path-2-bar:          #6B8BC4;
+  --path-3-bg:           rgba(90,155,111,0.08);
+  --path-3-bar:          #5A9B6F;
+  --path-badge-warn:     #B85A3A;
+  --path-badge-popular:  #2D7A4E;
+  --path-badge-loop:     #6B4A8F;
+  --path-badge-neutral:  #6E6E73;
+
+  /* ----- 3. SCALE — Radius ----- */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 100px;
+
+  /* ----- 3. SCALE — Spacing (4-pt) ----- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+
+  /* ----- 3. SCALE — Type ----- */
+  --font-ui:  'Roboto', system-ui, -apple-system, 'SF Pro Text', sans-serif;
+
+  --fs-caption:  11px;   /* tags, kickers */
+  --fs-meta:     12px;   /* dates, counts */
+  --fs-small:    13px;   /* subtitles, FAQ Q */
+  --fs-body:     14px;   /* body text */
+  --fs-base:     15px;   /* row text */
+  --fs-cell:     16px;   /* cell title */
+  --fs-h3:       17px;
+  --fs-h2:       20px;
+  --fs-h1:       22px;   /* article title (Android) */
+  --fs-display:  28px;   /* large header */
+
+  --lh-tight: 1.25;
+  --lh-base:  1.4;
+  --lh-loose: 1.55;
+
+  /* ----- 3. SCALE — Header (Telegram Android M3 top app bar) ----- */
+  --header-h:        56px;
+  --header-icon-tap: 48px;
+  --header-icon:     24px;
+  --header-pad-x:    4px;
+  --header-elev:     0 1px 2px rgba(0,0,0,0.04);
+
+  /* ----- 3. SCALE — Tabbar (Android Material) ----- */
+  --tabbar-h: 64px;
+}
+
+/* ============================================================
+   DARK THEME — same tokens, rewired values
+   ============================================================ */
+[data-theme="dark"] {
+  --tg-bg:             #18222D;
+  --tg-secondary-bg:   #232E3C;
+  --tg-section-bg:     #232E3C;
+  --tg-tertiary-bg:    #1B2733;
+  --tg-text:           #FFFFFF;
+  --tg-hint:           #7D8993;
+  --tg-subtitle:       #7D8993;
+  --tg-section-header: #7D8993;
+  --tg-divider:        rgba(255,255,255,0.08);
+  --tg-header-bg:      #1F2A36;
+
+  --case-all-text:       #B0B0B5;
+  --case-all-bg:         rgba(180,180,185,0.14);
+  --case-norwegian-text: #7FD8A0;
+  --case-norwegian-bg:   rgba(45,150,90,0.18);
+  --case-eu-text:        #88BFEB;
+  --case-eu-bg:          rgba(60,140,200,0.18);
+  --case-skilled-text:   #ECBA84;
+  --case-skilled-bg:     rgba(210,140,60,0.18);
+  --case-refugee-text:   #DFA0CE;
+  --case-refugee-bg:     rgba(180,100,160,0.18);
+
+  --stage-prepare-text:  #6FA9F9;
+  --stage-prepare-bg:    rgba(52,120,246,0.18);
+  --stage-wait-text:     #E5B574;
+  --stage-wait-bg:       rgba(194,131,48,0.20);
+  --stage-got-text:      #7FD8A0;
+  --stage-got-bg:        rgba(45,150,90,0.18);
+  --stage-renew-text:    #D78EC3;
+  --stage-renew-bg:      rgba(180,100,160,0.18);
+  --stage-other-text:    #C4C4C8;
+  --stage-other-bg:      rgba(180,180,185,0.14);
+  --stage-multi-text:    #C5A8E0;
+  --stage-multi-bg:      rgba(180,140,220,0.16);
+
+  --block-tldr-text:     #7FD8A0;
+  --block-tldr-bg:       rgba(45,150,90,0.14);
+  --block-tldr-border:   rgba(45,150,90,0.28);
+  --block-warn-text:     #FFC472;
+  --block-warn-bg:       rgba(255,180,80,0.14);
+  --block-warn-border:   rgba(255,180,80,0.30);
+  --block-tip-text:      #7FD8A0;
+  --block-tip-bg:        rgba(52,199,89,0.14);
+  --block-tip-border:    rgba(52,199,89,0.28);
+  --block-quote-text:    #C5A8E0;
+  --block-quote-bg:      rgba(180,140,220,0.10);
+  --block-community-bg:  rgba(180,140,220,0.10);
+  --block-community-bar: #C5A8E0;
+
+  /* Start-card override for dark — base is darker so white title reads */
+  --start-card-bg: linear-gradient(135deg,
+                     color-mix(in srgb, var(--tg-button-color) 28%, #1B2733) 0%,
+                     #1B2733 55%,
+                     var(--tg-section-bg) 100%);
+  --start-card-border: color-mix(in srgb, var(--tg-button-color) 38%, transparent);
+  --start-card-kicker: color-mix(in srgb, var(--tg-button-color) 75%, #ffffff);
+}
+
+/* ============================================================
+   ACCENT SWATCHES — surfaced to Tweaks panel.
+   Each accent rewrites: --tg-button-color, --tg-accent-text,
+   --tg-link, --tg-section-header. Light + dark variants.
+   ============================================================ */
+:root {
+  --accent-blue-light:      #2481CC;
+  --accent-blue-dark:       #6AB3F3;
+  --accent-norwegian-light: #BA0C2F; /* Norway flag red */
+  --accent-norwegian-dark:  #E55570;
+  --accent-crimson-light:   #C2185B;
+  --accent-crimson-dark:    #F06292;
+  --accent-royal-light:     #5E35B1;
+  --accent-royal-dark:      #B39DDB;
+}
+
+[data-accent="blue"] {
+  --tg-button-color:   var(--accent-blue-light);
+  --tg-accent-text:    var(--accent-blue-light);
+  --tg-link:           var(--accent-blue-light);
+  --tg-section-header: var(--accent-blue-light);
+}
+[data-accent="norwegian"] {
+  --tg-button-color:   var(--accent-norwegian-light);
+  --tg-accent-text:    var(--accent-norwegian-light);
+  --tg-link:           var(--accent-norwegian-light);
+  --tg-section-header: var(--accent-norwegian-light);
+}
+[data-accent="crimson"] {
+  --tg-button-color:   var(--accent-crimson-light);
+  --tg-accent-text:    var(--accent-crimson-light);
+  --tg-link:           var(--accent-crimson-light);
+  --tg-section-header: var(--accent-crimson-light);
+}
+[data-accent="royal"] {
+  --tg-button-color:   var(--accent-royal-light);
+  --tg-accent-text:    var(--accent-royal-light);
+  --tg-link:           var(--accent-royal-light);
+  --tg-section-header: var(--accent-royal-light);
+}
+
+[data-theme="dark"][data-accent="blue"] {
+  --tg-button-color:   var(--accent-blue-dark);
+  --tg-accent-text:    var(--accent-blue-dark);
+  --tg-link:           var(--accent-blue-dark);
+  --tg-section-header: var(--accent-blue-dark);
+}
+[data-theme="dark"][data-accent="norwegian"] {
+  --tg-button-color:   var(--accent-norwegian-dark);
+  --tg-accent-text:    var(--accent-norwegian-dark);
+  --tg-link:           var(--accent-norwegian-dark);
+  --tg-section-header: var(--accent-norwegian-dark);
+}
+[data-theme="dark"][data-accent="crimson"] {
+  --tg-button-color:   var(--accent-crimson-dark);
+  --tg-accent-text:    var(--accent-crimson-dark);
+  --tg-link:           var(--accent-crimson-dark);
+  --tg-section-header: var(--accent-crimson-dark);
+}
+[data-theme="dark"][data-accent="royal"] {
+  --tg-button-color:   var(--accent-royal-dark);
+  --tg-accent-text:    var(--accent-royal-dark);
+  --tg-link:           var(--accent-royal-dark);
+  --tg-section-header: var(--accent-royal-dark);
+}
+
+/* ============================================================
+   DENSITY — adjusts spacing scale + header padding.
+   "regular" = baseline (defined above); compact tightens vertical
+   rhythm by ~25%, comfy loosens by ~15%.
+   ============================================================ */
+[data-density="compact"] {
+  --space-2: 6px;
+  --space-3: 9px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 20px;
+  --header-h: 52px;
+}
+[data-density="comfy"] {
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 20px;
+  --space-5: 26px;
+  --space-6: 32px;
+  --header-h: 60px;
+}
