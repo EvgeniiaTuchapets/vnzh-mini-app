@@ -67,6 +67,17 @@ function MiniApp({ tweaks }) {
   const [activeStage, setActiveStage] = useState(null);
   const [caseOpen, setCaseOpen] = useState(false);
   const [openArticleTitle, setOpenArticleTitle] = useState(null);
+  const [shareCopied, setShareCopied] = useState(false);
+
+  // Deep link: ?article=<id> при открытии
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const articleId = params.get('article');
+    if (articleId) {
+      const a = ARTICLES.find(a => a.id === articleId);
+      if (a) setOpenArticleTitle(a.title);
+    }
+  }, []);
 
   const handleSetCase = (id) => {
     setActiveCase(id);
@@ -117,10 +128,22 @@ function MiniApp({ tweaks }) {
         <TgHeader
           title={article ? article.title : ''}
           onBack={() => setOpenArticleTitle(null)}
-          actions={<button className="tg-icon-btn" aria-label="Поделиться">
-            <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-              <path d="M14 9V5l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-            </svg>
+          actions={<button className="tg-icon-btn" aria-label="Поделиться" onClick={() => {
+            if (!article) return;
+            const base = window.location.origin + window.location.pathname;
+            const url = `${base}?article=${article.id}`;
+            if (navigator.share) {
+              navigator.share({ title: article.title, url }).catch(() => {});
+            } else {
+              navigator.clipboard?.writeText(url);
+              setShareCopied(true);
+              setTimeout(() => setShareCopied(false), 1500);
+            }
+          }}>
+            {shareCopied
+              ? <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M5 12l5 5L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              : <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M14 9V5l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>
+            }
           </button>}
         />
         {openArticleTitle && <ArticleView title={openArticleTitle} />}
