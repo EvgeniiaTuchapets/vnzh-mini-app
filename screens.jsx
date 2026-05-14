@@ -26,13 +26,13 @@ function stageById(id) { return STAGES.find((s) => s.id === id); }
 // CSS-var-based icon style for a case (no hex anywhere)
 function caseIconVars(caseId) {
   return {
-    '--icon-bg':  `var(--case-${caseId}-bg)`,
-    '--icon-fg':  `var(--case-${caseId}-text)`,
+    '--icon-bg': `var(--case-${caseId}-bg)`,
+    '--icon-fg': `var(--case-${caseId}-text)`,
   };
 }
 function caseChipVars(caseId) {
   return {
-    '--chip-bg':   `var(--case-${caseId}-bg)`,
+    '--chip-bg': `var(--case-${caseId}-bg)`,
     '--chip-text': `var(--case-${caseId}-text)`,
   };
 }
@@ -145,7 +145,7 @@ function MainScreen({ activeCase, activeStage, onOpenCase, onSetStage, onOpenArt
                 className={`stage-card ${activeStage === st.id ? 'is-active' : ''}`}
                 data-stage={st.id}
                 style={{
-                  '--stage-tint':    `var(--stage-${st.id}-text)`,
+                  '--stage-tint': `var(--stage-${st.id}-text)`,
                   '--stage-tint-bg': `var(--stage-${st.id}-bg)`,
                 }}
                 onClick={() => onSetStage(activeStage === st.id ? null : st.id)}>
@@ -160,7 +160,7 @@ function MainScreen({ activeCase, activeStage, onOpenCase, onSetStage, onOpenArt
           className={`stage-card stage-card--wide ${activeStage === 'other' ? 'is-active' : ''}`}
           data-stage="other"
           style={{
-            '--stage-tint':    'var(--stage-other-text)',
+            '--stage-tint': 'var(--stage-other-text)',
             '--stage-tint-bg': 'var(--stage-other-bg)',
           }}
           onClick={() => onSetStage(activeStage === 'other' ? null : 'other')}>
@@ -333,14 +333,13 @@ function AboutScreen() {
         <div className="section-header">О приложении</div>
         <div className="tg-section">
           <div className="tg-section-row">
-            Бесплатная база знаний для тех, кто оформляет ВНЖ в Норвегии по линии семейной иммиграции.
-            Внутри собраны короткие статьи с TL;DR, ответами на частые вопросы и ссылками на источники UDI.
+            Бесплатная база знаний для тех, кто оформляет ВНЖ в Норвегии по линии семейной иммиграции. Внутри — короткие статьи, ответы на частые вопросы и ссылки на источники UDI. Покрывает весь путь: от подготовки документов до продления ВНЖ и перехода к ПМЖ.
           </div>
         </div>
 
         <div className="section-header">Для кого</div>
         <div className="tg-section">
-          <div className="tg-section-row tg-section-row--icon"><span>👩</span> Для русскоязычных, кто переезжает к мужу или партнёру в Норвегию</div>
+          <div className="tg-section-row tg-section-row--icon"><span>�</span> Для русскоязычных, кто переезжает к супругу или партнёру в Норвегию</div>
           <div className="tg-section-row tg-section-row--icon"><span>📋</span> На разных этапах: от подготовки документов до продления ВНЖ</div>
           <div className="tg-section-row tg-section-row--icon"><span>🤝</span> Подходит для всех кейсов: норвежец, ЕС/ЕЭЗ, скилд-воркер, беженец</div>
         </div>
@@ -348,8 +347,7 @@ function AboutScreen() {
         <div className="section-header">Источники</div>
         <div className="tg-section">
           <div className="tg-section-row">
-            Информация основана на официальных страницах <strong>UDI</strong> (Norwegian Directorate of Immigration)
-            и опыте русскоязычного сообщества. Опыт сообщества всегда отмечен и не заменяет закон.
+            Информация основана на официальных страницах <strong>UDI</strong> (Norwegian Directorate of Immigration) и подтверждённом опыте русскоязычного сообщества. Опыт сообщества всегда отмечен и не заменяет официальные правила.
           </div>
         </div>
 
@@ -388,7 +386,7 @@ function ArticleView({ title }) {
   const a = ARTICLES.find((a) => a.title === title);
   if (!a) return null;
   const c = ARTICLE_CONTENT[a.id] || ARTICLE_CONTENT[title];
-  if (!c) return <div className="screen"><div className="scroll-area"><p style={{padding: 24}}>Содержимое статьи не найдено.</p></div></div>;
+  if (!c) return <div className="screen"><div className="scroll-area"><p style={{ padding: 24 }}>Содержимое статьи не найдено.</p></div></div>;
 
   const stagesArr = getArticleStages(a);
   const primaryStage = getPrimaryStage(a);
@@ -437,14 +435,14 @@ function ArticleView({ title }) {
 
         {c?.tldr && (
           Array.isArray(c.tldr) ?
-          <div className="art-block art-tldr">
-            <div className="art-block-title">📌 Коротко</div>
-            <ul>{c.tldr.map((t, i) => <li key={i} dangerouslySetInnerHTML={{ __html: t }} />)}</ul>
-          </div> :
-          <div className="art-block art-tldr">
-            <div className="art-block-title">📌 Коротко</div>
-            <p dangerouslySetInnerHTML={{ __html: c.tldr }} />
-          </div>
+            <div className="art-block art-tldr">
+              <div className="art-block-title">📌 Коротко</div>
+              <ul>{c.tldr.map((t, i) => <li key={i} dangerouslySetInnerHTML={{ __html: t }} />)}</ul>
+            </div> :
+            <div className="art-block art-tldr">
+              <div className="art-block-title">📌 Коротко</div>
+              <p dangerouslySetInnerHTML={{ __html: c.tldr }} />
+            </div>
         )}
 
         {c?.actionNow && (
