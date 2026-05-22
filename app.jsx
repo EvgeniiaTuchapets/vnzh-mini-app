@@ -63,7 +63,14 @@ function MiniApp({ tweaks }) {
   }, [accent, density, dark, tweaks.stageStyle]);
 
   const [tab, setTab] = useState('home');
-  const [activeCase, setActiveCase] = useState('all');
+  const [activeCase, setActiveCase] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = params.get('case');
+    if (fromUrl && CASES.find(c => c.id === fromUrl)) return fromUrl;
+    const saved = localStorage.getItem('vnzh_active_case');
+    if (saved && CASES.find(c => c.id === saved)) return saved;
+    return 'all';
+  });
   const [activeStage, setActiveStage] = useState(null);
   const [caseOpen, setCaseOpen] = useState(false);
   const [openArticleTitle, setOpenArticleTitle] = useState(null);
@@ -79,13 +86,37 @@ function MiniApp({ tweaks }) {
     }
   }, []);
 
-  const handleSetCase = (id) => {
+  // Обновляет URL при открытии/закрытии статьи
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (openArticleTitle) {
+      const a = ARTICLES.find(a => a.title === openArticleTitle);
+      if (a) params.set('article', a.id); else params.delete('article');
+    } else {
+      params.delete('article');
+    }
+    const q = params.toString();
+    history.replaceState(null, '', q ? '?' + q : window.location.pathname);
+  }, [openArticleTitle]);
+
+  // Применяет смену кейса: обновляет state, localStorage и URL
+  const applyCaseChange = (id) => {
     setActiveCase(id);
+    if (id === 'all') localStorage.removeItem('vnzh_active_case');
+    else localStorage.setItem('vnzh_active_case', id);
+    const params = new URLSearchParams(window.location.search);
+    if (id === 'all') params.delete('case'); else params.set('case', id);
+    const q = params.toString();
+    history.replaceState(null, '', q ? '?' + q : window.location.pathname);
+  };
+
+  const handleSetCase = (id) => {
+    applyCaseChange(id);
     setTimeout(() => setCaseOpen(false), 80);
   };
   const handleResetAll = (mode) => {
-    if (mode === 'case') setActiveCase('all');
-    else { setActiveCase('all'); setActiveStage(null); }
+    if (mode === 'case') applyCaseChange('all');
+    else { applyCaseChange('all'); setActiveStage(null); }
   };
 
   const headerTitle = tab === 'about' ? 'О проекте' : 'ВНЖ Норвегии';
