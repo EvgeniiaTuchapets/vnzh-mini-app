@@ -166,7 +166,7 @@ function MiniApp({ tweaks }) {
             }
           </button>}
         />
-        {openArticleTitle && <ArticleView title={openArticleTitle} onOpenArticle={(t) => setOpenArticleTitle(t)} />
+        {openArticleTitle && <ArticleView title={openArticleTitle} onOpenArticle={(t) => setOpenArticleTitle(t)} />}
       </div>
 
       <nav className="tg-tabbar" role="navigation">
@@ -205,33 +205,8 @@ function App() {
   }, []);
 
   // На GitHub Pages или в Telegram — рендерим только само приложение, без рамки
-  if (!isLocalDev) {
-    const isDark = window.Telegram?.WebApp?.colorScheme === 'dark';
-    return <MiniApp tweaks={{ ...TWEAK_DEFAULTS, dark: isDark }} />;
-  }
-
-  // На localhost — оставляем дизайн-стенд с рамкой и панелью настроек
-  return (
-    <>
-      <div className="stage-title">
-        <strong>База знаний</strong> · ВНЖ Норвегии — Android hi-fi · v5
-      </div>
-
-      <div className="stage" data-theme={t.dark ? 'dark' : 'light'}>
-        <div>
-          <div className="frame-label">Android · {t.dark ? 'dark' : 'light'} · {t.density}</div>
-          <AndroidDevice width={390} height={780} dark={t.dark}>
-            <MiniAppMemo tweaks={t} />
-          </AndroidDevice>
-        </div>
-      </div>
-
-      <TweaksPanel>
-        <TweakSection label="Тема" />
-        <TweakToggle label="Тёмная" value={t.dark} onChange={(v) => setTweak('dark', v)} />
-      </TweaksPanel>
-    </>
-  );
+  const isDark = window.Telegram?.WebApp?.colorScheme === 'dark';
+  return <MiniApp tweaks={{ ...TWEAK_DEFAULTS, dark: isDark }} />;
 }
 
 const MiniAppMemo = React.memo(MiniApp);
