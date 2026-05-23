@@ -382,7 +382,7 @@ function AboutScreen() {
 }
 
 // --- Article View ---
-function ArticleView({ title }) {
+function ArticleView({ title, onOpenArticle }) {
   const a = ARTICLES.find((a) => a.title === title);
   if (!a) return null;
   const c = ARTICLE_CONTENT[a.id] || ARTICLE_CONTENT[title];
@@ -414,9 +414,18 @@ function ArticleView({ title }) {
   }
   if (a.topic) allTags.push({ k: 'topic', label: '📚 ' + a.topic });
 
+  const handleContentClick = React.useCallback((e) => {
+    const link = e.target.closest('a[data-article]');
+    if (!link) return;
+    e.preventDefault();
+    const id = link.dataset.article;
+    const target = ARTICLES.find(a => a.id === id);
+    if (target && onOpenArticle) onOpenArticle(target.title);
+  }, [onOpenArticle]);
+
   return (
     <div className="screen">
-      <div className="scroll-area scroll-area--article">
+      <div className="scroll-area scroll-area--article" onClick={handleContentClick}>
         <div className="article-tags">
           {allTags.map((t, i) =>
             <Tag key={i} kind={t.k} dataStage={t.s}>{t.icon ? `${t.icon} ` : ''}{t.label}</Tag>

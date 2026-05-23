@@ -166,7 +166,7 @@ function MiniApp({ tweaks }) {
             }
           </button>}
         />
-        {openArticleTitle && <ArticleView title={openArticleTitle} />}
+        {openArticleTitle && <ArticleView title={openArticleTitle} onOpenArticle={(t) => setOpenArticleTitle(t)} />
       </div>
 
       <nav className="tg-tabbar" role="navigation">
