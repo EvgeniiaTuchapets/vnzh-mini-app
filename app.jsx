@@ -119,21 +119,10 @@ function MiniApp({ tweaks }) {
     else { applyCaseChange('all'); setActiveStage(null); }
   };
 
-  const headerTitle = tab === 'about' ? 'О проекте' : 'ВНЖ Норвегии';
   const article = openArticleTitle && ARTICLES.find(a => a.title === openArticleTitle);
 
   return (
     <div className="tg-app" ref={rootRef}>
-      <TgHeader
-        title={headerTitle}
-        showLeadingSpacer
-        actions={
-          <>
-            {showSearch && <button className="tg-icon-btn" aria-label="Поиск"><IconSearch width="22" height="22" /></button>}
-            <button className="tg-icon-btn" aria-label="Меню"><IconMore width="22" height="22" /></button>
-          </>
-        }
-      />
 
       {tab === 'home' && (
         <MainScreen
@@ -164,7 +153,7 @@ function MiniApp({ tweaks }) {
             const base = window.location.origin + window.location.pathname;
             const url = `${base}?article=${article.id}`;
             if (navigator.share) {
-              navigator.share({ title: article.title, url }).catch(() => {});
+              navigator.share({ title: article.title, url }).catch(() => { });
             } else {
               navigator.clipboard?.writeText(url);
               setShareCopied(true);
