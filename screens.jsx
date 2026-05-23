@@ -538,32 +538,14 @@ function ArticleView({ title }) {
         )}
 
         <div className="art-block art-feedback">
-          <p>Если в статье что-то устарело или неточно — напишите нам. Мы поправим.</p>
-          <div className="art-feedback-ref">
-            <span className="art-feedback-ref-label">Название статьи</span>
-            <div className="art-feedback-ref-row">
-              <span className="art-feedback-ref-title">{title}</span>
-              <button
-                className="art-feedback-copy"
-                aria-label="Скопировать название"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const btn = e.currentTarget;
-                  navigator.clipboard?.writeText(title);
-                  btn.classList.add('is-copied');
-                  setTimeout(() => btn.classList.remove('is-copied'), 1200);
-                }}>
-                <svg className="copy-default" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <rect x="5" y="5" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
-                  <path d="M3 11V4.5C3 3.67 3.67 3 4.5 3H11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                </svg>
-                <svg className="copy-done" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <a className="tg-button tg-button--filled" href="https://t.me/fan4itta" target="_blank" rel="noopener noreferrer">Сообщить об ошибке</a>
+          <p>Помогите сделать эту статью лучше! Напишите нам, если в статье что-то устарело или неточно.</p>
+          <button className="tg-button tg-button--filled" onClick={() => {
+            const text = `⚠️ Нашла неточность в статье:\n«${title}»\n\nЧто именно неточно:\n`;
+            const url = `https://t.me/fan4itta?text=${encodeURIComponent(text)}`;
+            const tg = window.Telegram?.WebApp;
+            if (tg?.openTelegramLink) tg.openTelegramLink(url);
+            else window.open(url, '_blank');
+          }}>Сообщить об ошибке</button>
         </div>
 
         <div style={{ height: 24 }} />
