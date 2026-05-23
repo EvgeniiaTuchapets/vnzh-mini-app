@@ -540,7 +540,7 @@ function ArticleView({ title }) {
         <div className="art-block art-feedback">
           <p>Помогите сделать эту статью лучше! Напишите нам, если в статье что-то устарело или неточно.</p>
           <button className="tg-button tg-button--filled" onClick={() => {
-            const text = `⚠️ Нашла неточность в статье:\n«${title}»\n\nЧто именно неточно:\n`;
+            const text = `⚠️ Неточность в статье:\n«${title}»\n\nЧто именно неточно:\n`;
             const url = `https://t.me/fan4itta?text=${encodeURIComponent(text)}`;
             const tg = window.Telegram?.WebApp;
             if (tg?.openTelegramLink) tg.openTelegramLink(url);
