@@ -423,9 +423,14 @@ function ArticleView({ title, onOpenArticle }) {
     if (target && onOpenArticle) onOpenArticle(target.title);
   }, [onOpenArticle]);
 
+  const scrollRef = useRef(null);
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [title]);
+
   return (
     <div className="screen">
-      <div className="scroll-area scroll-area--article" onClick={handleContentClick}>
+      <div className="scroll-area scroll-area--article" ref={scrollRef} onClick={handleContentClick}>
         <div className="article-tags">
           {allTags.map((t, i) =>
             <Tag key={i} kind={t.k} dataStage={t.s}>{t.icon ? `${t.icon} ` : ''}{t.label}</Tag>
