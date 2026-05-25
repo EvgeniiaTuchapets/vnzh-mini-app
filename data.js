@@ -129,7 +129,7 @@ window.ARTICLES = [
   {
     id: 'where-to-apply',
     title: 'Где подавать заявление: из России или из Норвегии',
-    articleType: 'опорная',
+    articleType: 'start',
     sourceType: 'official-udi',
     stages: ['prepare'],
     cases: ['norwegian', 'eu', 'skilled', 'refugee'],
