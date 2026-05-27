@@ -488,8 +488,6 @@ function ArticleView({ title, onOpenArticle }) {
           </div>
         )}
 
-        {c?.faq && c.faq.length > 0 && <FaqAccordion items={c.faq} />}
-
         {c?.sectionsAfterFaq?.map((s, i) =>
           <section key={i} className="article-section">
             <h2 className="article-h2">{s.title}</h2>
@@ -523,6 +521,8 @@ function ArticleView({ title, onOpenArticle }) {
             </div>
           </div>
         )}
+
+        {c?.faq && c.faq.length > 0 && <FaqAccordion items={c.faq} />}
 
         {c?.quotes && c.quotes.length > 0 && (
           <div className="art-block art-quotes">
